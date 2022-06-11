@@ -7,6 +7,7 @@ import "@/pages/index/index.less";
 type Grouping = {
   id: number;
   groupName: string;
+//   children:
 };
 
 const List: React.FC = () => {
@@ -44,23 +45,19 @@ const List: React.FC = () => {
   ];
   return (
     <div className={style.boxContainer}>
-      {todoList.map((item) => {
-        return (
-          <div className={style.todoListContainer} key={item.groupName}>
-            <div className={style.todoListContainerTop}>
-              <h4 >{item.groupName}</h4>
-              <EllipsisOutlined className={style.Extensions} />
-            </div>
-            {item.children.map((childrenItem: any) => {
-              return (
-                <div className={style.todoListContainerBottom}>
-                  {childrenItem.content}
-                </div>
-              );
-            })}
+      {todoList.map((item) => (
+        <div className={style.todoListContainer} key={item.groupName}>
+          <div className={style.todoListContainerTop}>
+            <h4 className={style.cardTitle}>{item.groupName}</h4>
+            <EllipsisOutlined className={style.Extensions} />
           </div>
-        );
-      })}
+          {item.children.map((childrenItem: any) => (
+            <div className={style.todoListContainerBottom}>
+              {childrenItem.content}
+            </div>
+          ))}
+        </div>
+      ))}
     </div>
   );
 };
