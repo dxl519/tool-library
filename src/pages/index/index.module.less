@@ -1,0 +1,62 @@
+.Container {
+  padding: 16px;
+}
+
+.boxContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 250px);
+  gap: 20px;
+}
+.todoListContainer {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(6px);
+  border-radius: 12px;
+  padding: 12px 0;
+  animation:addTodoAnimation 2.5s ;
+}
+.todoListContainerTop {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.todoListContainerBottom{
+    padding: 0 12px;
+    margin-top: 12px;
+}
+.addTodo {
+  position: absolute;
+  right: 5%;
+  bottom: 5%;
+  border-radius: 50%;
+  font-size: 40px;
+  background: black;
+  color: #fff;
+  animation: addTodoAnimation 2.5s;
+}
+.Extensions {
+  position: absolute;
+  right: 5%;
+  font-size: 20px;
+}
+@media (max-width: 500px) {
+  .boxContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .todoListContainer {
+    width: 100%;
+  }
+}
+@keyframes addTodoAnimation {
+  0% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.75;
+  }
+  100% {
+    opacity: 1;
+  }
+}
