@@ -1,58 +1,26 @@
-import { useState } from "react";
+import {
+  useState,
+} from "react";
 import { EllipsisOutlined } from "@ant-design/icons";
-
+import {Grouping,ListChildren} from '@/pages/index/type'
 import style from "@/pages/index/index.module.less";
 import "@/pages/index/index.less";
 
-type Grouping = {
-  id: number;
-  groupName: string;
-//   children:
-};
 
-const List: React.FC = () => {
+
+const List = (props:any) => {
   // const [todoList, setToDoList] = useState<Grouping>();
-
-  const todoList = [
-    {
-      id: 1,
-      groupName: "测试1",
-      children: [
-        {
-          id: 1,
-          content: "内容1",
-        },
-        {
-          id: 2,
-          content: "内容2",
-        },
-      ],
-    },
-    {
-      id: 2,
-      groupName: "测试2",
-      children: [
-        {
-          id: 3,
-          content: "内容1",
-        },
-        {
-          id: 4,
-          content: "内容2",
-        },
-      ],
-    },
-  ];
+  const { todoList } = props;
   return (
     <div className={style.boxContainer}>
-      {todoList.map((item) => (
+      {todoList.map((item:Grouping) => (
         <div className={style.todoListContainer} key={item.groupName}>
           <div className={style.todoListContainerTop}>
             <h4 className={style.cardTitle}>{item.groupName}</h4>
             <EllipsisOutlined className={style.Extensions} />
           </div>
-          {item.children.map((childrenItem: any) => (
-            <div className={style.todoListContainerBottom}>
+          {item.children.map((childrenItem: ListChildren) => (
+            <div className={style.todoListContainerBottom} key={childrenItem.id}>
               {childrenItem.content}
             </div>
           ))}
