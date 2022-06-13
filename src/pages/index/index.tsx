@@ -1,59 +1,52 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { Drawer, Input, Button } from "antd";
 import { PlusCircleFilled, PlusOutlined } from "@ant-design/icons";
-import { Grouping } from "@/pages/index/type";
 import List from "@/pages/index/list";
+import { apiTest } from "@/http/apiConfig";
+
+import { Grouping } from "@/pages/index/type";
 
 import style from "@/pages/index/index.module.less";
 import "@/pages/index/index.less";
-const todoListTest = [
-  {
-    id: 1,
-    groupName: "测试1",
-    children: [
-      {
-        id: 1,
-        content: "内容1",
-      },
-      {
-        id: 2,
-        content: "内容2",
-      },
-    ],
-  },
-  {
-    id: 2,
-    groupName: "测试2",
-    children: [
-      {
-        id: 3,
-        content: "内容1",
-      },
-      {
-        id: 4,
-        content: "内容2",
-      },
-    ],
-  },
-];
+
 const Index: React.FC = () => {
   const [visible, setVisible] = useState<boolean>(false); //显示抽屉，增加待办
   const [isAddIcon, setIsAddIcon] = useState<boolean>(true);
-  const [todoContent, setToDoContent] = useState<string>();
-  const [todoList, setToDoList] = useState<Grouping[]>();
+  const [todoContent, setToDoContent] = useState<string>(); //输入todo卡片列表名称
+  const [todoList, setToDoList] = useState<Grouping[]>([]);
   useEffect(() => {
-    setToDoList([...todoListTest]);
+    getTest();
   }, []);
+  const getTest = async () => {
+    const res = await apiTest();
+    setToDoList(res.data.todoListTest)
+  };
+
   //打开抽屉，添加代办
   const handClickAddTodo = (): void => {
     setIsAddIcon(!isAddIcon);
     setVisible(!visible);
   };
-
-  const handKeyDownAddCard = (
-    event: KeyboardEvent
-  ): void => {
-    console.log(event)
+  const handKeyDownAddCard = (event: React.KeyboardEvent): void => {
+    if (event.nativeEvent.keyCode == 13) {
+      const newList = [
+        {
+          id: 4,
+          groupName: "测试3",
+          children: [
+            {
+              id: 8,
+              content: "内容3",
+            },
+            {
+              id: 9,
+              content: "内容3",
+            },
+          ],
+        },
+      ];
+      setToDoList([...newList, ...todoList]);
+    }
   };
   //关闭抽屉
   const onClose = (): void => {
@@ -73,9 +66,14 @@ const Index: React.FC = () => {
     console.log("添加卡片");
   };
 
+  const ListElement = useMemo(() => {
+    return <List todoList={todoList} />;
+  }, [todoList]);
+
+  // const
   return (
     <div className={style.Container}>
-      <List todoList={todoListTest} />
+      {ListElement}
       <Drawer
         title="添加待办列表"
         width={"60%"}
@@ -89,11 +87,11 @@ const Index: React.FC = () => {
           className={style.CardNameBox}
           placeholder="请输入内容"
           onChange={handChangeValue}
+          onKeyDown={handKeyDownAddCard}
         />
         <Button
           className={style.AddCardBtn}
           onClick={handClickAddCard}
-          onKeyDown={handKeyDownAddCard}
           type="primary"
           shape="round"
           icon={<PlusOutlined />}

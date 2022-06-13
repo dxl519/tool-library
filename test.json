@@ -1,0 +1,35 @@
+{
+  "status": 200,
+  "data": {
+    "todoListTest": [
+      {
+        "id": 1,
+        "groupName": "测试1",
+        "children": [
+          {
+            "id": 1,
+            "content": "内容1"
+          },
+          {
+            "id": 2,
+            "content": "内容2"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "groupName": "测试2",
+        "children": [
+          {
+            "id": 3,
+            "content": "内容1"
+          },
+          {
+            "id": 4,
+            "content": "内容2"
+          }
+        ]
+      }
+    ]
+  }
+}

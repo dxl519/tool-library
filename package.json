@@ -11,6 +11,7 @@
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "@jiaminghi/data-view-react": "^1.2.5",
+    "@types/node": "^17.0.42",
     "antd": "^4.21.0",
     "axios": "^0.27.2",
     "brtc-js": "^1.0.7",
