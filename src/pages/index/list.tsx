@@ -4,7 +4,11 @@ import { Grouping, ListChildren } from "@/pages/index/type";
 import style from "@/pages/index/index.module.less";
 import "@/pages/index/index.less";
 
-const List = (props: any) => {
+
+type TypeProps={
+  todoList:Grouping[]
+}
+export default(props: TypeProps) => {
   const { todoList } = props;
 
   return <div className={style.boxContainer}>
@@ -27,4 +31,4 @@ const List = (props: any) => {
     </div>;
 };
 
-export default List;
+

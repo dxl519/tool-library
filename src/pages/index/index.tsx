@@ -11,21 +11,29 @@ import "@/pages/index/index.less";
 
 const Index: React.FC = () => {
   const [visible, setVisible] = useState<boolean>(false); //显示抽屉，增加待办
-  const [isAddIcon, setIsAddIcon] = useState<boolean>(true);
+  const [isAddIcon, setIsAddIcon] = useState<boolean>(true);  //是否显示增加按钮
   const [todoContent, setToDoContent] = useState<string>(); //输入todo卡片列表名称
-  const [todoList, setToDoList] = useState<Grouping[]>([]);
+  const [todoList, setToDoList] = useState<Grouping[]>([]); //todo卡片列表
+
   useEffect(() => {
     getTest();
   }, []);
+
   const getTest = async () => {
     const res = await apiTest();
-    setToDoList(res.data.todoListTest)
+    setToDoList(res.data.todoListTest);
+  };
+
+  //抽离公共逻辑
+  const statusIconVisible = () => {
+    setIsAddIcon(!isAddIcon);
+    setVisible(!visible);
+    setToDoContent("");
   };
 
   //打开抽屉，添加代办
   const handClickAddTodo = (): void => {
-    setIsAddIcon(!isAddIcon);
-    setVisible(!visible);
+    statusIconVisible();
   };
   const handKeyDownAddCard = (event: React.KeyboardEvent): void => {
     if (event.nativeEvent.keyCode == 13) {
@@ -46,12 +54,12 @@ const Index: React.FC = () => {
         },
       ];
       setToDoList([...newList, ...todoList]);
+      statusIconVisible();
     }
   };
   //关闭抽屉
   const onClose = (): void => {
-    setIsAddIcon(!isAddIcon);
-    setVisible(!visible);
+    statusIconVisible();
   };
 
   //todolist输入的内容
@@ -86,13 +94,13 @@ const Index: React.FC = () => {
         <Input
           className={style.CardNameBox}
           placeholder="请输入内容"
+          value={todoContent}
           onChange={handChangeValue}
           onKeyDown={handKeyDownAddCard}
         />
         <Button
           className={style.AddCardBtn}
           onClick={handClickAddCard}
-          type="primary"
           shape="round"
           icon={<PlusOutlined />}
           size={"large"}
