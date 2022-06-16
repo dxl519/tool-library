@@ -35,8 +35,9 @@ const Index: React.FC = () => {
   const handClickAddTodo = (): void => {
     statusIconVisible();
   };
+  
   const handKeyDownAddCard = (event: React.KeyboardEvent): void => {
-    if (event.nativeEvent.keyCode == 13) {
+    if (event.nativeEvent.key == 'Enter') {
       const newList = [
         {
           id: 4,
@@ -57,6 +58,7 @@ const Index: React.FC = () => {
       statusIconVisible();
     }
   };
+
   //关闭抽屉
   const onClose = (): void => {
     statusIconVisible();
@@ -72,13 +74,13 @@ const Index: React.FC = () => {
   //点击添加todo卡片
   const handClickAddCard = (): void => {
     console.log("添加卡片");
+    statusIconVisible();
   };
 
   const ListElement = useMemo(() => {
     return <List todoList={todoList} />;
   }, [todoList]);
 
-  // const
   return (
     <div className={style.Container}>
       {ListElement}
