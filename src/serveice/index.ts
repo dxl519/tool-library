@@ -4,9 +4,9 @@ import { AxiosResponse } from 'axios'
 import type { RequestConfig } from './request/types'
 
 export interface YWZResponse<T> {
-  status: number
-  msg: string
-  data: T
+  statusCode: number
+  desc: string
+  result: T
 }
 
 // 重写返回类型
@@ -37,25 +37,13 @@ const request = new Request({
  * @param {YWZRequestConfig} config 不管是GET还是POST请求都使用data
  * @returns {Promise}
  */
-
-
-
- const ywzRequest = <D = any, T = any>(config: YWZRequestConfig<D, T>) => {
+const ywzRequest = <D = any, T = any>(config: YWZRequestConfig<D, T>) => {
   const { method = 'GET' } = config
   if (method === 'get' || method === 'GET') {
     config.params = config.data
   }
   return request.request<YWZResponse<T>>(config)
 }
-
-
-// const ywzRequest = <D = any, T = any>(config: YWZRequestConfig<D, T>) => {
-//   const { method = 'GET' } = config
-//   if (method === 'get' || method === 'GET') {
-//     config.params = config.data
-//   }
-//   return request.request<YWZResponse<T>>(config)
-// }
 // 取消请求
 export const cancelRequest = (url: string | string[]) => {
   return request.cancelRequest(url)

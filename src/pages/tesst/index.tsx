@@ -1,13 +1,5 @@
-import { useState } from "react";
-import { Drawer, Input, Button } from "antd";
+const Test=()=>{
+    return <div >测试</div>
+}
 
-const Test = () => {
- 
-  return (
-    <div>
-     
-    </div>
-  );
-};
-
-export default Test;
+export default Test
