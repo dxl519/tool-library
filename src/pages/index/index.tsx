@@ -11,7 +11,7 @@ import "@/pages/index/index.less";
 
 const Index: React.FC = () => {
   const [visible, setVisible] = useState<boolean>(false); //显示抽屉，增加待办
-  const [isAddIcon, setIsAddIcon] = useState<boolean>(true);  //是否显示增加按钮
+  const [isAddIcon, setIsAddIcon] = useState<boolean>(true); //是否显示增加按钮
   const [todoContent, setToDoContent] = useState<string>(); //输入todo卡片列表名称
   const [todoList, setToDoList] = useState<Grouping[]>([]); //todo卡片列表
 
@@ -25,7 +25,7 @@ const Index: React.FC = () => {
   };
 
   //抽离公共逻辑
-  const statusIconVisible = () => {
+  const statusIconVisible = (): void => {
     setIsAddIcon(!isAddIcon);
     setVisible(!visible);
     setToDoContent("");
@@ -35,8 +35,9 @@ const Index: React.FC = () => {
   const handClickAddTodo = (): void => {
     statusIconVisible();
   };
+
   const handKeyDownAddCard = (event: React.KeyboardEvent): void => {
-    if (event.nativeEvent.keyCode == 13) {
+    if (event.nativeEvent.key == "Enter") {
       const newList = [
         {
           id: 4,
@@ -57,6 +58,7 @@ const Index: React.FC = () => {
       statusIconVisible();
     }
   };
+
   //关闭抽屉
   const onClose = (): void => {
     statusIconVisible();
@@ -72,13 +74,13 @@ const Index: React.FC = () => {
   //点击添加todo卡片
   const handClickAddCard = (): void => {
     console.log("添加卡片");
+    statusIconVisible();
   };
 
   const ListElement = useMemo(() => {
     return <List todoList={todoList} />;
   }, [todoList]);
 
-  // const
   return (
     <div className={style.Container}>
       {ListElement}

@@ -1,17 +1,16 @@
-import { useState, useMemo } from "react";
 import { EllipsisOutlined } from "@ant-design/icons";
 import { Grouping, ListChildren } from "@/pages/index/type";
 import style from "@/pages/index/index.module.less";
 import "@/pages/index/index.less";
 
+type TypeProps = {
+  todoList: Grouping[];
+};
 
-type TypeProps={
-  todoList:Grouping[]
-}
-export default(props: TypeProps) => {
+export default (props: TypeProps) => {
   const { todoList } = props;
-
-  return <div className={style.boxContainer}>
+  return (
+    <div className={style.boxContainer}>
       {todoList.map((item: Grouping) => (
         <div className={style.todoListContainer} key={item.groupName}>
           <div className={style.todoListContainerTop}>
@@ -28,7 +27,6 @@ export default(props: TypeProps) => {
           ))}
         </div>
       ))}
-    </div>;
+    </div>
+  );
 };
-
-
