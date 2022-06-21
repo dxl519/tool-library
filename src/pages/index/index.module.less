@@ -4,12 +4,15 @@
 
 .boxContainer {
   display: grid;
-  grid-template-columns: repeat(auto-fit, 250px);
+  grid-template-columns: repeat(auto-fit, 230px);
   gap: 20px;
 }
 .todoListContainer {
   width: 100%;
-  background: rgba(255, 255, 255, 0.2);
+  box-shadow: -6px 0 16px -8px rgba(233, 232, 232, 0.08), -9px 0 28px 0 rgb(0 0 0 / 5%),
+    -12px -12px 48px 16px rgb(0 0 0 / 6%);
+  // background: rgba(255, 255, 255,.2);
+  background: hsla(0, 50%, 100, 0.65);
   backdrop-filter: blur(6px);
   border-radius: 12px;
   padding: 12px 0;
@@ -28,8 +31,6 @@
 .AddCardBtn {
   width: 100%;
   margin-top: 20px;
-  background-color: transparent !important;
-  color: white !important;
   border: none !important;
   border: 0.5px solid white !important;
   box-shadow: none !important;
@@ -40,7 +41,7 @@
   border: 0.5px solid white !important;
   border-radius: 32px;
   width: 100%;
-  background: transparent;
+  color: black !important;
   border: none;
 }
 .CardNameBox::-webkit-input-placeholder {
